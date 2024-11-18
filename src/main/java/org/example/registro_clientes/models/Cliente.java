@@ -1,5 +1,6 @@
 package org.example.registro_clientes.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -38,10 +39,12 @@ public class Cliente implements Serializable {
     @Column(name = "numero",length = 255, nullable = false)
     private int numero;
     @Column(name = "telefono", length = 12, nullable = false)
-    private int telefono;
+    private String telefono;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idMunicipio", nullable = false)
+    @JsonManagedReference
     private Municipio idMunicipio;
 
     @ManyToOne(fetch = FetchType.LAZY)
