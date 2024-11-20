@@ -29,9 +29,8 @@ public class ClienteController {
 
     @PostMapping("/clientes")
     @ResponseStatus(HttpStatus.CREATED)
-    public void guardarCliente(@RequestBody Cliente cliente) {
-        System.out.println(cliente);
-        service.createCliente(cliente);
+    public Cliente guardarCliente(@RequestBody Cliente cliente) {
+        return service.createCliente(cliente);
     }
 
     @DeleteMapping("/clientes/{id}")
