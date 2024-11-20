@@ -1,4 +1,5 @@
 package org.example.registro_clientes.models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,7 @@ public class EntidadFederativa implements Serializable {
     private String abrevEntidad;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "idEntidad")
+    @JsonIgnoreProperties(value = {"clientes", "handler", "hibernateLazyInitializer"}, allowSetters = true)
     private List<Municipio> municipios;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "idEntidad")
     private List<Cliente> clientes;
@@ -40,5 +42,13 @@ public class EntidadFederativa implements Serializable {
         for (Cliente cliente : clientes) {
             cliente.setIdEntidad(this);
         }
+    }
+    @Override
+    public String toString() {
+        return "EntidadFederativa{" +
+                "idEntidad=" + idEntidad +
+                ", nombreEntidad='" + nombreEntidad + '\'' +
+                ", abrevEntidad='" + abrevEntidad + '\'' +
+                '}';
     }
 }

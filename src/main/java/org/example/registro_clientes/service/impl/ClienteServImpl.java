@@ -35,19 +35,18 @@ public class ClienteServImpl implements ClienteService {
     }
 
     @Override
-    public void createCliente(Cliente cliente) {
-//        Long idMunicipio = cliente.getIdMunicipio().getIdMunicipio();
-//        Optional<Municipio> municipioOptional = municipioDao.findById(idMunicipio);
-//        Municipio municipio = municipioOptional
-//                .orElseThrow(() -> new RuntimeException("Municipio no encontrado con id " + idMunicipio));
-//        Long idEntidad = municipio.getIdEntidad().getIdEntidad();
-//        Optional<EntidadFederativa> entidadOptional = entidadDao.findById(idEntidad);
-//        EntidadFederativa entidad = entidadOptional
-//                .orElseThrow(() -> new RuntimeException("Entidad Federativa no encontrada"));
-//        cliente.setIdMunicipio(municipio);
-//        cliente.setIdEntidad(entidad);
-//        dao.save(cliente);
-        System.out.println(cliente);
+    public Cliente createCliente(Cliente cliente) {
+        Long idMunicipio = cliente.getIdMunicipio().getIdMunicipio();
+        Optional<Municipio> municipioOptional = municipioDao.findById(idMunicipio);
+        Municipio municipio = municipioOptional
+                .orElseThrow(() -> new RuntimeException("Municipio no encontrado con id " + idMunicipio));
+        Long idEntidad = municipio.getIdEntidad().getIdEntidad();
+        Optional<EntidadFederativa> entidadOptional = entidadDao.findById(idEntidad);
+        EntidadFederativa entidad = entidadOptional
+                .orElseThrow(() -> new RuntimeException("Entidad Federativa no encontrada"));
+        cliente.setIdMunicipio(municipio);
+        cliente.setIdEntidad(entidad);
+        return dao.save(cliente);
     }
 
     @Override

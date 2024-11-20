@@ -27,7 +27,7 @@ public class Municipio implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idEntidad", nullable = false)
     //Evita la deserialización recursiva
-    @JsonIgnoreProperties(value = {"municipios", "handler","hibernateLazyInitializer"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"municipios", "clientes", "handler", "hibernateLazyInitializer"}, allowSetters = true)
     private EntidadFederativa idEntidad;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "idMunicipio")
@@ -38,5 +38,14 @@ public class Municipio implements Serializable {
         for (Cliente cliente : clientes) {
             cliente.setIdMunicipio(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Municipio{" +
+                "idMunicipio=" + idMunicipio +
+                ", nombreMunicipio='" + nombreMunicipio + '\'' +
+                ", abrevMunicipio='" + abrevMunicipio + '\'' +
+                '}';
     }
 }
